@@ -5,9 +5,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float speed;
-    public float forceScale;
-    public bool isGround;
+    [SerializeField]
+    private float speed;
+    [SerializeField]
+    private float forceScale;
+    [SerializeField]
+    private bool isGround;
     void Start()
     {
         
@@ -35,7 +38,7 @@ public class Player : MonoBehaviour
         {
             this.GetComponent<Animator>().SetBool("IsRunning", false);
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && isGround)
         {
             this.GetComponent<Rigidbody2D>().AddForce(Vector2.up * forceScale, ForceMode2D.Impulse);
             this.GetComponent<Animator>().SetTrigger("IsJumping");
